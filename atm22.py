@@ -119,6 +119,12 @@ class  atm:
             cash = self.txtReceipt.get("1.0", "end-1c")
             bal= bal-int(cash)
             self.txtReceipt.insert(END, "\n\n" + 'The cash withdrawn: '+ cash )
+
+        def input_value2():
+            global bal
+            cash = self.txtReceipt.get("1.0", "end-1c")
+            bal= bal+int(cash)
+            self.txtReceipt.insert(END, "\n\n" + 'The cash deposited: '+ cash )
             
             
 
@@ -197,12 +203,9 @@ class  atm:
             self.txtReceipt.focus_set()
 
         def deposit():
-            enter_pin()
+            
             self.txtReceipt.delete("1.0", END)
-            global bal
-            self.txtReceipt.insert(END, 'Deposit Rupees: ' )
-            deposit_user = self.txtReceipt.get("1.0", "end-1c")
-            bal= bal+ int(deposit_user)
+
             self.txtReceipt.focus_set()
 
         def request_new_pin():
@@ -228,7 +231,23 @@ class  atm:
             self.txtReceipt.insert(END,'Mini Statement\t\t\t Print Statement' + "\n\n\n\n")
             self.txtReceipt.insert(END, 'Thanks for using ABC Bank' )
 
+
         def statement():
+            global bal
+            self.txtReceipt.delete("1.0", END)
+
+            self.txtReceipt.insert(END, '\tAccount Balance ₹' + str(bal) + "\t\t\n\n")
+            self.txtReceipt.insert(END,'Rent \t\t\t\t ₹30000' + "\n\n") 
+            self.txtReceipt.insert(END,'Auto \t\t\t\t ₹20' + "\n\n") 
+            self.txtReceipt.insert(END,'Fruits \t\t\t\t ₹180' + "\n\n") 
+            self.txtReceipt.insert(END,'Auto \t\t\t\t ₹20' + "\n\n")
+            self.txtReceipt.insert(END,'Fees \t\t\t\t ₹80000' + "\n\n")
+            self.txtReceipt.insert(END,'Auto \t\t\t\t ₹20' + "\n\n")
+            self.txtReceipt.insert(END,'clothes \t\t\t\t ₹2000' + "\n\n")
+            self.txtReceipt.insert(END,'Auto \t\t\t\t ₹20' + "\n\n")
+            self.txtReceipt.insert(END,'Auto \t\t\t\t ₹20' + "\n\n")
+
+        def statement2():
             pinNo1 = str(self.txtReceipt.get("1.0", "end-1c"))
             pinNo2 = str(pinNo1)
             pinNo3 = float(pinNo2)
@@ -240,7 +259,11 @@ class  atm:
             self.txtReceipt.insert(END,'Auto \t\t\t\t ₹20' + "\n\n") 
             self.txtReceipt.insert(END,'Fruits \t\t\t\t ₹180' + "\n\n") 
             self.txtReceipt.insert(END,'Auto \t\t\t\t ₹20' + "\n\n")
-            self.txtReceipt.insert(END,'Fees \t\t\t\t ₹80000' + "\n\n") 
+            self.txtReceipt.insert(END,'Fees \t\t\t\t ₹80000' + "\n\n")
+            self.txtReceipt.insert(END,'Auto \t\t\t\t ₹20' + "\n\n")
+            self.txtReceipt.insert(END,'clothes \t\t\t\t ₹2000' + "\n\n")
+            self.txtReceipt.insert(END,'Auto \t\t\t\t ₹20' + "\n\n")
+            self.txtReceipt.insert(END,'Auto \t\t\t\t ₹20' + "\n\n")
             
         #_________________________________WIDGET_____________________________________
 
@@ -351,7 +374,7 @@ class  atm:
  
 
         self.img_Sp2 = PhotoImage(file="empty.png")
-        self.btn4=Button(TopFrame1, width=90, height=50,
+        self.btn4=Button(TopFrame1, width=90, height=50, command=input_value2,
         image=self.img_Sp2).grid(row=5,column =2, padx=4, pady=4)
  
         self.img_Sp3 = PhotoImage(file="empty.png")
