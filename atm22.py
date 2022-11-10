@@ -1,9 +1,12 @@
 from tkinter import*
 from tkinter import ttk
 import tkinter.messagebox
+bal=150000
+
 
 
 class  atm:
+    
     def __init__(self, root) :
         self.root = root
         blank_space = " "
@@ -63,7 +66,7 @@ class  atm:
                 command= Loan,image=self.img_arrow_Right).grid(row=0,column =0, padx=2, pady=2)
 
                 self.btnArrowL2=Button(TopFrame2Right, width=90, height=50, state = NORMAL,
-                image=self.img_arrow_Right).grid(row=1,column =0, padx=2, pady=2)
+                command= deposit, image=self.img_arrow_Right).grid(row=1,column =0, padx=2, pady=2)
 
                 self.btnArrowL3=Button(TopFrame2Right, width=90, height=50, state = NORMAL,
                 command= request_new_pin, image=self.img_arrow_Right).grid(row=2,column =0, padx=2, pady=2)
@@ -111,7 +114,14 @@ class  atm:
                 self.btnArrowL4=Button(TopFrame2Right, width=90, height=50, state = DISABLED,
                 image=self.img_arrow_Right).grid(row=3,column =0, padx=2, pady=2)
 
-        
+        def input_value():
+            global bal
+            cash = self.txtReceipt.get("1.0", "end-1c")
+            bal= bal-int(cash)
+            self.txtReceipt.insert(END, "\n\n" + 'The cash withdrawn: '+ cash )
+            
+            
+
         def insert0():
             Value0 = 0
             self.txtReceipt.insert(END, Value0)
@@ -160,8 +170,24 @@ class  atm:
                 return
 
         def withdrawcash():
-            enter_pin()
+            #input_value()
             self.txtReceipt.delete("1.0", END)
+            #global bal
+            #self.txtReceipt.insert(END, 'Withdraw Rupees: ' )
+            
+            
+            
+            
+
+           
+            self.txtReceipt.focus_set()
+
+
+        def withdrawcash2():
+            input_value()
+            self.txtReceipt.delete("1.0", END)
+            self.txtReceipt.insert(END, 'Withdraw Rupees: ' )
+            
             self.txtReceipt.focus_set()
 
         def Loan():
@@ -173,6 +199,10 @@ class  atm:
         def deposit():
             enter_pin()
             self.txtReceipt.delete("1.0", END)
+            global bal
+            self.txtReceipt.insert(END, 'Deposit Rupees: ' )
+            deposit_user = self.txtReceipt.get("1.0", "end-1c")
+            bal= bal+ int(deposit_user)
             self.txtReceipt.focus_set()
 
         def request_new_pin():
@@ -189,7 +219,9 @@ class  atm:
         def Balance():
             self.txtReceipt.delete("1.0", END)
             self.txtReceipt.insert(END, '\t\tWelcome to ABC Bank' + "\n\n")
-            self.txtReceipt.insert(END, '₹150000' + "\n" )
+            
+
+            self.txtReceipt.insert(END, 'Your total Balance is ₹' + str(bal) + "\n" )
             self.txtReceipt.insert(END,'Withdraw Cash\t\t\t Loan' + "\n\n\n\n") 
             self.txtReceipt.insert(END,'Cash with Receipt\t\t\t Deposit' + "\n\n\n\n") 
             self.txtReceipt.insert(END,'Balance\t\t\t Request New Pin' + "\n\n\n\n") 
@@ -310,7 +342,7 @@ class  atm:
 
 
         self.imgSp1 = PhotoImage(file="empty.png")
-        self.btn4=Button(TopFrame1, width=90, height=50,
+        self.btn4=Button(TopFrame1, width=90, height=50, command= input_value,
         image=self.imgSp1).grid(row=5,column =0, padx=4, pady=4)
 
         self.img_0 = PhotoImage(file="zero.png")
