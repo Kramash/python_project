@@ -38,7 +38,7 @@ class  atm:
 
         def enter_pin():
             pinNo = self.txtReceipt.get("1.0", "end-1c")
-            if((pinNo == str("2213")) or (pinNo == str("4323")) or (pinNo == str("5982"))):
+            if((pinNo == str("2213"))):
                 self.txtReceipt.delete("1.0", END)
 
                 self.txtReceipt.insert(END,'\t\t   ATM' + "\n\n") 
@@ -126,7 +126,11 @@ class  atm:
             bal= bal+int(cash)
             self.txtReceipt.insert(END, "\n\n" + 'The cash deposited: '+ cash )
             
-            
+        def input_value3():
+            global bal
+            cash = self.txtReceipt.get("1.0", "end-1c")
+            bal= bal+int(cash)
+            self.txtReceipt.insert(END, "\n\n" + 'Loaned Rupees: '+ cash )    
 
         def insert0():
             Value0 = 0
@@ -196,11 +200,16 @@ class  atm:
             
             self.txtReceipt.focus_set()
 
-        def Loan():
+        def Loan2():
             enter_pin()
             self.txtReceipt.delete("1.0", END)
             self.txtReceipt.insert(END, 'Loan Rupees: ' )
             self.txtReceipt.focus_set()
+
+        def Loan():
+            self.txtReceipt.delete("1.0", END)
+
+            self.txtReceipt.focus_set()           
 
         def deposit():
             
@@ -378,7 +387,7 @@ class  atm:
         image=self.img_Sp2).grid(row=5,column =2, padx=4, pady=4)
  
         self.img_Sp3 = PhotoImage(file="empty.png")
-        self.btn4=Button(TopFrame1, width=90, height=50,
+        self.btn4=Button(TopFrame1, width=90, height=50, command= input_value3,
         image=self.img_Sp3).grid(row=5,column =3, padx=4, pady=4)
  
 
